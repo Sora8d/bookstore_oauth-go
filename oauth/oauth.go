@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Sora8d/bookstore_oauth-go/oauth/util/errors"
+	errors "github.com/Sora8d/bookstore_utils-go/rest_errors"
 	rest "github.com/go-resty/resty/v2"
 )
 
