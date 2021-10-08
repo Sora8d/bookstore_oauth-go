@@ -2,13 +2,14 @@ package oauth
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
-	errors "github.com/Sora8d/bookstore_utils-go/rest_errors"
+	resterrs "github.com/Sora8d/bookstore_utils-go/rest_errors"
 	rest "github.com/go-resty/resty/v2"
 )
 
@@ -67,7 +68,7 @@ func GetClientId(request *http.Request) int64 {
 	return clientId
 }
 
-func AuthenticateRequest(request *http.Request) *errors.RestErr {
+func AuthenticateRequest(request *http.Request) resterrs.RestErr {
 	if request == nil {
 		return nil
 	}
@@ -81,7 +82,7 @@ func AuthenticateRequest(request *http.Request) *errors.RestErr {
 
 	at, err := getAccessToken(accessTokenId)
 	if err != nil {
-		if err.Status == http.StatusNotFound {
+		if err.Status() == http.StatusNotFound {
 			return nil
 		}
 		return err
@@ -102,30 +103,34 @@ func cleanRequest(request *http.Request) {
 	request.Header.Del(headerXCallerId)
 }
 
-func getAccessToken(at_string string) (*accessToken, *errors.RestErr) {
+func getAccessToken(at_string string) (*accessToken, resterrs.RestErr) {
 	restreq := oauthRestClient.R()
 	restreq.Method = http.MethodGet
 	restreq.URL = fmt.Sprintf("/oauth/access_token/%s", at_string)
 
 	response, err := restreq.Send()
 	if err != nil {
-		return nil, errors.NewInternalServerError("error in the restclient functionality")
+		resterr := resterrs.NewInternalServerError("error in the restclient functionality", err)
+		return nil, resterr
 	}
 	if response == nil || response.Body() == nil {
-		return nil, errors.NewInternalServerError("invalid restclient response when trying to login user")
+		resterr := resterrs.NewInternalServerError("invalid restclient response when trying to login user", errors.New("response nil"))
+		return nil, resterr
 	}
 	if response.IsError() {
-		var restErr errors.RestErr
+		var restErr resterrs.RestErr
 		err := json.Unmarshal(response.Body(), &restErr)
 		if err != nil {
-			return nil, errors.NewInternalServerError("invalid error interface when trying to log into user")
+			resterr := resterrs.NewInternalServerError("invalid error interface when trying to log into user", err)
+			return nil, resterr
 		}
-		return nil, &restErr
+		return nil, restErr
 	}
 
 	var at accessToken
 	if err := json.Unmarshal(response.Body(), &at); err != nil {
-		return nil, errors.NewInternalServerError("error when trying to unmarshal acces token response")
+		resterr := resterrs.NewInternalServerError("error when trying to unmarshal acces token response", err)
+		return nil, resterr
 	}
 	return &at, nil
 }
