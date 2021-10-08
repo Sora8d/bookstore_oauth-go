@@ -23,7 +23,7 @@ const (
 var oauthRestClient *rest.Client = rest.New()
 
 func init() {
-	oauthRestClient.SetHostURL("localhost:8080")
+	oauthRestClient.SetHostURL("http//127.0.0.1:8080")
 	oauthRestClient.SetTimeout(100 * time.Millisecond)
 }
 
@@ -81,6 +81,9 @@ func AuthenticateRequest(request *http.Request) *errors.RestErr {
 
 	at, err := getAccessToken(accessTokenId)
 	if err != nil {
+		if err.Status == http.StatusNotFound {
+			return nil
+		}
 		return err
 	}
 
