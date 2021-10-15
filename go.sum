@@ -1,5 +1,5 @@
-github.com/Sora8d/bookstore_utils-go v0.0.0-20211008143022-f1f62a23ac8a h1:ftmNqq2riyPJA6G5sCQVkfE6hfcwqhS7i6aTs5dGna8=
-github.com/Sora8d/bookstore_utils-go v0.0.0-20211008143022-f1f62a23ac8a/go.mod h1:ymezsYYddY5vO35dxpBJQ89921lM8x99qs900oYZe7k=
+github.com/Sora8d/bookstore_utils-go v0.0.0-20211015171847-405f893a21d0 h1:JBh616TJc0vlFYC5G/nSVMV3HgBltx9lrz+DRszrRMM=
+github.com/Sora8d/bookstore_utils-go v0.0.0-20211015171847-405f893a21d0/go.mod h1:ymezsYYddY5vO35dxpBJQ89921lM8x99qs900oYZe7k=
 github.com/benbjohnson/clock v1.1.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

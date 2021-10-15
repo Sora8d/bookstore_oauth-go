@@ -3,7 +3,7 @@ module github.com/Sora8d/bookstore_oauth-go
 go 1.17
 
 require (
-	github.com/Sora8d/bookstore_utils-go v0.0.0-20211008143022-f1f62a23ac8a
+	github.com/Sora8d/bookstore_utils-go v0.0.0-20211015171847-405f893a21d0
 	github.com/go-resty/resty/v2 v2.6.0
 )
 
