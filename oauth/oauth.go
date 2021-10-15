@@ -124,7 +124,7 @@ func AuthenticateRequest(request *http.Request) rest_errors.RestErr {
 		return nil
 	}
 
-	at, err := oauthRestClient.getAccessToken(accessTokenId)
+	at, err := OauthRestClient.getAccessToken(accessTokenId)
 	if err != nil {
 		if err.Status() == http.StatusNotFound {
 			return nil
