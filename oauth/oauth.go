@@ -22,7 +22,7 @@ const (
 	paramAccessToken = "access_token"
 )
 
-var oauthRestClient oauthInterface = &oauthClient{}
+var OauthRestClient oauthInterface = &oauthClient{}
 
 type oauthClient struct {
 	client *rest.Client
